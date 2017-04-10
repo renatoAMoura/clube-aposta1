@@ -64,6 +64,7 @@
                         <input type="text" name="scoreAway" class="form-control" placeholder="Placar Away" value="{{$jogo->scoreAway}}">
                         {!! $errors->first('scoreAway','<p class="help-block">:message</p>') !!}
                     </div>
+
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary" value="Salvar Alterações">
                     </div>

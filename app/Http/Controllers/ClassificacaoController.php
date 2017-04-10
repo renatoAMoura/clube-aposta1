@@ -43,19 +43,18 @@ class ClassificacaoController extends Controller
 
         $times = [];
 
-
+        //Pega os Id's de cada time que possui jogo no campeonato
         foreach ($jogos as $jogo) {
 
             array_push($times, $jogo->home_id);
             array_push($times, $jogo->away_id);
-
-
         }
 
+        //Exclui os Id's duplicados
         $uniqueTimes = array_unique($times);
         $classi = array();
 
-        //Preencher Array com id dos times
+
         foreach ($uniqueTimes as $t)
         {
             $time = Time::findOrFail($t);
@@ -68,6 +67,7 @@ class ClassificacaoController extends Controller
             $numeroGolsSofridos = 0;
             $numeroJogos = 0;
 
+            //Para cada time percorre-se a lista de jogos do cacmpeonato
             foreach ($jogos as $jogo) {
 
 
@@ -117,22 +117,27 @@ class ClassificacaoController extends Controller
                 }
             }
 
+            //Atribui os valores à sua respectiva propriedade
+            $classificacao->golsSofridos = $numeroGolsSofridos;
+            $classificacao->vitorias = $numeroVitorias;
+            $classificacao->pontos = $numeroPontos;
+            $classificacao->golsMarcados = $numeroGolsMarcados;
+            $classificacao->saldo = $numeroGolsMarcados-$numeroGolsSofridos;
+            $classificacao->jogos = $numeroJogos;
 
-        $classificacao->golsSofridos = $numeroGolsSofridos;
-        $classificacao->vitorias = $numeroVitorias;
-        $classificacao->pontos = $numeroPontos;
-        $classificacao->golsMarcados = $numeroGolsMarcados;
-        $classificacao->saldo = $numeroGolsMarcados-$numeroGolsSofridos;
-        $classificacao->jogos = $numeroJogos;
+            array_push($classi, $classificacao);
 
-        array_push($classi, $classificacao);
-
-    }
+        }
+        //Transforma numa coleção laravel para utilizar a ordenação
         $collection = collect($classi);
 
-        $sorted = $collection->sortByDesc('saldo')->sortByDesc('vitorias')->sortByDesc('pontos');
+        //Ordena seguindo criterios de desempate: pontos->vitorias->saldo
+
+        $sorted = $collection->sortByDesc('saldo')->sortBy('vitorias')->sortByDesc('pontos');
         $sorted->values()->all();
 
+
+        //carrega lista de campeonatos para exibir na view
         $campeonatos = Campeonato::all();
 
         return view('classificacao.index', compact('campeonatos','jogos','sorted','nomeTime'));

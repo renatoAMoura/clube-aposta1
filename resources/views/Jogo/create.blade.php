@@ -2,8 +2,8 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-2">
-                <h1>Novo registro</h1>
+            <div class="col-md-12">
+                <h1>Novo jogo</h1>
             </div>
         </div>
         <div class="row">

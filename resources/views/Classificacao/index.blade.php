@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <h1>Classificação</h1>
             </div>
         </div>
@@ -22,6 +22,7 @@
                             </select>
                         </label>
                     <br>
+
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Carregar Classificaçao">
             </div>
@@ -36,7 +37,7 @@
                     <th>Equipe</th>
                     <th>Pontos</th>
                     <th>Jogos</th>
-                    <th>Vitória</th>
+                    <th>Vitórias</th>
                     <th>Gols Pró</th>
                     <th>Gols Contra</th>
                     <th>Saldo</th>

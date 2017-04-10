@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Jogo;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -11,8 +9,6 @@ class HomeController extends Controller
      *
      * @return void
      */
-
-
 
     public function __construct()
     {
@@ -26,6 +22,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home', compact('jogos'));
+        return view('home');
     }
 }
